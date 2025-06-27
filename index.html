@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>N.K Nethma Yasith De Silva - Software Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #00010a;
+            --primary-color: #0a0f1a;
+            --accent-color: #00ffff;
+            --text-color: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --border-color: rgba(0, 255, 255, 0.2);
+            --primary: #1e90ff;
+            --bg: #f7faff;
+            --card-bg: #fff;
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            --radius: 24px;
+            --accent: #ffb300;
+            --secondary: #ff4081;
+            --tertiary: #00e676;
+            --quaternary: #7c4dff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Display', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 5%;
+            text-align: center;
+            position: relative;
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 0.8s cubic-bezier(.77,0,.18,1), transform 0.8s cubic-bezier(.77,0,.18,1);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .section h2 {
+            font-size: 3rem;
+            margin-bottom: 50px;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px var(--accent-color);
+        }
+
+        /* Hero Section */
+        #hero .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .profile-image-container {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            margin-bottom: 30px;
+            animation: pulse 2.5s infinite ease-in-out;
+            position: relative;
+            box-shadow: 0 0 20px var(--accent-color), inset 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        #hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px var(--accent-color);
+        }
+
+        #hero p {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 20px var(--accent-color), inset 0 0 10px rgba(0, 255, 255, 0.5); }
+            50% { transform: scale(1.05); box-shadow: 0 0 35px var(--accent-color), inset 0 0 15px rgba(0, 255, 255, 0.7); }
+            100% { transform: scale(1); box-shadow: 0 0 20px var(--accent-color), inset 0 0 10px rgba(0, 255, 255, 0.5); }
+        }
+
+        .hero-role-animated {
+            font-family: 'Fira Mono', 'SF Mono', 'Consolas', 'Menlo', monospace;
+            font-size: 2rem;
+            font-weight: 500;
+            color: var(--accent-color);
+            margin-top: 10px;
+            letter-spacing: 1.2px;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2.5px solid var(--accent-color);
+            animation: blink-cursor-hero 0.8s steps(1) infinite;
+            text-shadow: 0 0 12px var(--accent-color);
+        }
+        @keyframes blink-cursor-hero {
+            0%, 100% { border-color: var(--accent-color); }
+            50% { border-color: transparent; }
+        }
+        @media (max-width: 600px) {
+            .hero-role-animated {
+                font-size: 1.1rem;
+                margin-top: 7px;
+            }
+        }
+
+        /* Projects Section */
+        #projects .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .project-card {
+            background: rgba(10, 15, 26, 0.7);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            text-align: left;
+            transition: transform 0.2s ease-out, box-shadow 0.3s ease-out;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            box-shadow: 0 0 30px var(--border-color);
+            transform: translateY(-10px);
+        }
+
+        .project-image-container {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-3d-canvas {
+            width: 100%;
+            height: 180px;
+            display: block;
+        }
+        
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-content h3 {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .project-content p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Skills Section */
+        #skills-container {
+            width: 100%;
+            height: 50vh;
+            max-width: 800px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        /* Experience Section */
+        #experience .timeline {
+            position: relative;
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        #experience .timeline::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: var(--border-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+
+        .timeline-item.left {
+            left: 0;
+        }
+
+        .timeline-item.right {
+            left: 50%;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            background-color: var(--bg-color);
+            border: 4px solid var(--accent-color);
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .right::after {
+            left: -10px;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background: rgba(10, 15, 26, 0.7);
+            border: 1px solid var(--border-color);
+            position: relative;
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .timeline-content h3 {
+            color: var(--accent-color);
+            margin-bottom: 5px;
+        }
+        
+        .timeline-content p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        .timeline-content .date {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Responsive Timeline for Mobile */
+        @media (max-width: 700px) {
+            #experience .timeline {
+                max-width: 98vw;
+                padding: 0 0 0 0;
+            }
+            #experience .timeline::after {
+                left: 24px;
+                margin-left: 0;
+            }
+            .timeline-item {
+                width: 100%;
+                padding-left: 60px;
+                padding-right: 10px;
+                left: 0 !important;
+                margin-bottom: 40px;
+            }
+            .timeline-item.left,
+            .timeline-item.right {
+                left: 0 !important;
+            }
+            .timeline-item::after {
+                left: 10px !important;
+                right: auto;
+                top: 32px;
+            }
+            .timeline-content {
+                padding: 18px 14px;
+                border-radius: 10px;
+                min-width: 0;
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+
+        /* Contact Section */
+        #contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-button {
+            padding: 15px 30px;
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .form-button:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        footer a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        #logo-3d-container {
+            width: 52px !important;
+            height: 52px !important;
+            min-width: 36px;
+            min-height: 36px;
+            background: rgba(20, 30, 40, 0.22);
+            border-radius: 50%;
+            box-shadow: 0 2px 12px 0 rgba(0,255,255,0.10), 0 1px 4px 0 rgba(0,0,0,0.10);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: visible;
+            margin-right: 18px;
+        }
+        #logo-3d-container::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 108%;
+            height: 108%;
+            border-radius: 50%;
+            box-shadow: 0 0 18px 4px var(--accent-color);
+            opacity: 0.10;
+            pointer-events: none;
+            z-index: 0;
+            animation: logo-glow 2.5s ease-in-out infinite alternate;
+        }
+        @media (max-width: 600px) {
+            #logo-3d-container {
+                width: 36px !important;
+                height: 36px !important;
+                margin-right: 10px;
+            }
+        }
+        header {
+            height: 80px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+        @keyframes logo-glow {
+            0% { opacity: 0.18; }
+            100% { opacity: 0.32; }
+        }
+        .floating-contact {
+            position: fixed;
+            right: 28px;
+            bottom: 28px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .floating-contact-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-color) 60%, var(--accent) 100%);
+            box-shadow: 0 4px 24px 0 rgba(0,255,255,0.18), 0 1.5px 8px 0 rgba(0,0,0,0.18);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00010a;
+            font-size: 2rem;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.18s, box-shadow 0.18s;
+            outline: none;
+        }
+        .floating-contact-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 32px 8px var(--accent-color);
+        }
+        .floating-contact-btn:active {
+            transform: scale(0.97);
+        }
+        @media (max-width: 600px) {
+            .floating-contact {
+                right: 12px;
+                bottom: 12px;
+                gap: 10px;
+            }
+            .floating-contact-btn {
+                width: 44px;
+                height: 44px;
+                font-size: 1.4rem;
+            }
+        }
+        .header-name-typed {
+            font-family: 'Fira Mono', 'SF Mono', 'Consolas', 'Menlo', monospace;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-left: 18px;
+            letter-spacing: 1.5px;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid var(--accent-color);
+            animation: blink-cursor 0.8s steps(1) infinite;
+        }
+        @keyframes blink-cursor {
+            0%, 100% { border-color: var(--accent-color); }
+            50% { border-color: transparent; }
+        }
+        @media (max-width: 600px) {
+            .header-name-typed {
+                font-size: 0.95rem;
+                margin-left: 8px;
+            }
+        }
+        nav.main-nav {
+            display: flex;
+            gap: 32px;
+            padding: 0 8px;
+        }
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.08rem;
+            transition: color 0.2s;
+            position: relative;
+            padding: 2px 0 6px 0;
+        }
+        .nav-link:after {
+            content: '';
+            display: block;
+            width: 0;
+            height: 2.5px;
+            background: var(--accent-color);
+            transition: width 0.3s;
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+        }
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        .nav-link.active {
+            color: var(--accent-color);
+        }
+        .nav-link.active:after {
+            width: 100%;
+        }
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 44px;
+            height: 44px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            z-index: 20;
+        }
+        .nav-toggle .bar {
+            width: 28px;
+            height: 3px;
+            background: var(--accent-color);
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: all 0.35s cubic-bezier(.68,-0.55,.27,1.55);
+        }
+        @media (max-width: 900px) {
+            nav.main-nav {
+                position: fixed;
+                top: 0;
+                right: 0;
+                height: 100vh;
+                width: 220px;
+                background: rgba(10, 15, 26, 0.98);
+                box-shadow: -2px 0 24px 0 rgba(0,255,255,0.08);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 100px 32px 32px 32px;
+                gap: 32px;
+                transform: translateX(100%);
+                transition: transform 0.38s cubic-bezier(.68,-0.55,.27,1.55);
+                z-index: 15;
+            }
+            nav.main-nav.open {
+                transform: translateX(0);
+            }
+            .nav-link {
+                font-size: 1.25rem;
+                margin: 0 0 12px 0;
+            }
+            .nav-toggle {
+                display: flex;
+            }
+        }
+        .nav-toggle.open .bar:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .nav-toggle.open .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-toggle.open .bar:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        @media (max-width: 900px) {
+            header {
+                padding-top: 18px !important;
+                padding-bottom: 18px !important;
+            }
+        }
+        /* Staggered animation for child elements */
+        .section.visible .stagger {
+            opacity: 0;
+            transform: translateY(30px) scale(0.97);
+            animation: staggerFadeIn 0.7s cubic-bezier(.77,0,.18,1) forwards;
+        }
+        @keyframes staggerFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        /* Project cards and timeline items get stagger class */
+        .project-card.stagger, .timeline-item.stagger {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <header style="width: 100%; padding: 30px 5% 0 5%; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2;">
+        <div style="display: flex; align-items: center;">
+            <div id="logo-3d-container" style="width: 70px; height: 70px;"></div>
+            <span class="header-name-typed" id="typed-name"></span>
+        </div>
+        
+        <nav class="main-nav">
+            <a href="#hero" class="nav-link">Home</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#experience" class="nav-link">Experience</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+        <button class="nav-toggle" aria-label="Open menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </header>
+    <canvas id="bg-canvas"></canvas>
+    <div class="content-wrapper">
+        <main>
+            <section id="hero" class="section visible">
+                <div class="hero-content">
+                    <div id="face-3d-container" style="width:200px; height:200px; margin: 0 auto 30px auto;"></div>
+                    <h1>N.K Nethma Yasith De Silva</h1>
+                    <div class="hero-role-animated" id="hero-animated-role"></div>
+                </div>
+            </section>
+
+            <section id="projects" class="section">
+                <h2>Projects</h2>
+                <div class="project-grid">
+                    <div class="project-card" data-link="https://github.com/Nethma-Yasith?tab=overview&from=2025-04-01&to=2025-04-30">
+                        <div class="project-image-container">
+                            <div class="project-3d-canvas" data-project="patient-management"></div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Patient Management System (React/Laravel Group Project)</h3>
+                            <p>Developing a full-stack web app for a real client, focusing on secure patient data handling and an intuitive UI for medical staff.</p>
+                        </div>
+                    </div>
+                    <div class="project-card" data-link="https://github.com/Nethma-Yasith/React-Native-Chat-App">
+                        <div class="project-image-container">
+                            <div class="project-3d-canvas" data-project="react-native-chat"></div>
+                        </div>
+                        <div class="project-content">
+                            <h3>React Native Chat App</h3>
+                            <p>Created a real-time chat app with Firebase for instant messaging and user authentication. Published on GitHub.</p>
+                        </div>
+                    </div>
+                    <div class="project-card" data-link="https://www.youtube.com/watch?v=Qmf4czAD8GU&ab_channel=NethmaYasith">
+                        <div class="project-image-container">
+                            <div class="project-3d-canvas" data-project="game-development"></div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Game Development (Unity)</h3>
+                            <p>Developed an interactive 2D/3D game using Unity Engine and C#, implementing game physics, character controls, and UI.</p>
+                        </div>
+                    </div>
+                    <div class="project-card" data-link="https://github.com/Nethma-Yasith/Java-E-Commerce-Web-App">
+                        <div class="project-image-container">
+                            <div class="project-3d-canvas" data-project="ecommerce"></div>
+                        </div>
+                        <div class="project-content">
+                            <h3>E-Commerce Web Apps (PHP & Java EE)</h3>
+                            <p>Built two complete e-commerce platforms with features like product management, shopping cart, and a responsive user interface.</p>
+                        </div>
+                    </div>
+                    <div class="project-card" data-link="https://github.com/Nethma-Yasith/Java-Student-Management-System">
+                        <div class="project-image-container">
+                            <div class="project-3d-canvas" data-project="student-management"></div>
+                        </div>
+                        <div class="project-content">
+                            <h3>Student Management System (Java)</h3>
+                            <p>A desktop application for managing student records with secure login, database integration, and data management features.</p>
+                        </div>
+                    </div>
+                    <div class="project-card" data-link="https://github.com/Nethma-Yasith/Android-PetCare-App">
+                        <div class="project-image-container">
+                            <div class="project-3d-canvas" data-project="petcare"></div>
+                        </div>
+                        <div class="project-content">
+                            <h3>PetCare App - Android Application</h3>
+                            <p>An Android app using Firebase and Google Maps to connect pet owners with services, featuring location-based search and user profiles.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="skills" class="section">
+                <h2>Skills</h2>
+                <div id="skills-container"></div>
+            </section>
+
+            <section id="experience" class="section">
+                <h2>Experience & Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>BSc (Hons) Software Engineering</h3>
+                            <span class="date">Jan 2022 - Present (Expected 2025)</span>
+                            <p>Birmingham City University, UK. Focusing on full-stack development, mobile apps, and IoT.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item right">
+                        <div class="timeline-content">
+                            <h3>Patient Management System (React/Laravel) <span style='font-size:0.95em; color:var(--accent-color);'>(Group Project)</span></h3>
+                            <span class="date">2024</span>
+                            <p>Developed as a group project for a private hospital. Built a full-stack patient management system using React and Laravel, focusing on secure patient data handling and an intuitive UI for medical staff.</p>
+                        </div>
+                    </div>
+                     <div class="timeline-item left">
+                        <div class="timeline-content">
+                            <h3>Full-Stack & Mobile Development</h3>
+                             <span class="date">2022 - Present</span>
+                            <p>Hands-on experience with React, Laravel, React Native, Java, and PHP through various university and personal projects.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="section">
+                <h2>Contact</h2>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-input" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-input" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" class="form-input" rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <input type="hidden" name="title" value="Contact Form"/>
+                    <button type="submit" class="form-button">Send Message</button>
+                </form>
+                <div id="contact-status" style="margin-top: 18px; min-height: 24px; font-size: 1.1rem;"></div>
+            </section>
+        </main>
+        <footer>
+            <p>
+                Contact me at <a href="mailto:nethmayasith2001@gmail.com">nethmayasith2001@gmail.com</a> | 
+                <a href="https://github.com/NethmaYasith" target="_blank">GitHub</a>
+            </p>
+            <p>&copy; 2025 N.K Nethma Yasith De Silva. All Rights Reserved.</p>
+        </footer>
+    </div>
+    <div class="floating-contact">
+        <button class="floating-contact-btn" title="Email" onclick="window.open('mailto:nethmayasith2001@gmail.com')">
+            <i class="fas fa-envelope"></i>
+        </button>
+        <button class="floating-contact-btn" title="GitHub" onclick="window.open('https://github.com/Nethma-Yasith', '_blank')">
+            <i class="fab fa-github"></i>
+        </button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // --- 3D Background ---
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bg-canvas'), alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        const particlesCount = 5000;
+        const positions = new Float32Array(particlesCount * 3);
+        for (let i = 0; i < particlesCount * 3; i++) {
+            positions[i] = (Math.random() - 0.5) * 20;
+        }
+        const particlesGeometry = new THREE.BufferGeometry();
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.02,
+            color: 0x00ffff,
+            blending: THREE.AdditiveBlending,
+            transparent: true,
+            opacity: 0.7
+        });
+        const particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particleSystem);
+
+        // --- Rocket Model ---
+        const rocket = new THREE.Group();
+        // Body
+        const bodyGeometry = new THREE.CylinderGeometry(0.08, 0.13, 0.7, 16);
+        const bodyMaterial = new THREE.MeshPhongMaterial({ color: 0xffffff, shininess: 80 });
+        const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+        body.position.y = 0.35;
+        rocket.add(body);
+        // Nose cone
+        const coneGeometry = new THREE.ConeGeometry(0.13, 0.22, 16);
+        const coneMaterial = new THREE.MeshPhongMaterial({ color: 0xffb300 });
+        const cone = new THREE.Mesh(coneGeometry, coneMaterial);
+        cone.position.y = 0.81;
+        rocket.add(cone);
+        // Fins
+        const finGeometry = new THREE.BoxGeometry(0.04, 0.18, 0.12);
+        const finMaterial = new THREE.MeshPhongMaterial({ color: 0x00ffff });
+        for (let i = 0; i < 3; i++) {
+            const fin = new THREE.Mesh(finGeometry, finMaterial);
+            fin.position.y = 0.05;
+            fin.position.x = Math.cos((i / 3) * Math.PI * 2) * 0.13;
+            fin.position.z = Math.sin((i / 3) * Math.PI * 2) * 0.13;
+            fin.rotation.y = (i / 3) * Math.PI * 2;
+            rocket.add(fin);
+        }
+        // Window
+        const windowGeometry = new THREE.SphereGeometry(0.07, 16, 16);
+        const windowMaterial = new THREE.MeshPhongMaterial({ color: 0x1e90ff, emissive: 0x1e90ff, emissiveIntensity: 0.7 });
+        const windowMesh = new THREE.Mesh(windowGeometry, windowMaterial);
+        windowMesh.position.y = 0.55;
+        windowMesh.position.x = 0.09;
+        rocket.add(windowMesh);
+        // Flame (animated)
+        const flameGeometry = new THREE.ConeGeometry(0.09, 0.18, 12);
+        const flameMaterial = new THREE.MeshBasicMaterial({ color: 0xff4081, transparent: true, opacity: 0.7 });
+        const flame = new THREE.Mesh(flameGeometry, flameMaterial);
+        flame.position.y = -0.44;
+        flame.rotation.x = Math.PI;
+        rocket.add(flame);
+        // Lighting for rocket
+        const rocketLight = new THREE.PointLight(0xffb300, 0.7, 2);
+        rocketLight.position.set(0, 0.5, 0.3);
+        rocket.add(rocketLight);
+        // Initial position
+        rocket.position.set(-2, 1.2, 0);
+        scene.add(rocket);
+
+        camera.position.z = 5;
+
+        const mouse = new THREE.Vector2();
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // --- Scrolling Animation ---
+        let scrollY = window.scrollY;
+        let currentSection = 0;
+        const sectionCount = document.querySelectorAll('.section').length;
+        
+        window.addEventListener('scroll', () => {
+            scrollY = window.scrollY;
+            const newSection = Math.round(scrollY / window.innerHeight);
+            if(newSection != currentSection) {
+                currentSection = newSection;
+            }
+        });
+
+        // --- Animate Rocket Path ---
+        let rocketTime = 0;
+        function animate() {
+            requestAnimationFrame(animate);
+            // Starfield animation
+            particleSystem.rotation.y += 0.0001;
+            particleSystem.rotation.x += 0.0001;
+            // Mouse interaction
+            camera.position.x += (mouse.x * 0.5 - camera.position.x) * 0.02;
+            camera.position.y += (mouse.y * 0.5 - camera.position.y) * 0.02;
+            camera.lookAt(scene.position);
+            // Scroll-based camera dolly
+            const targetZ = 5 - (scrollY / window.innerHeight) * 3;
+            camera.position.z += (targetZ - camera.position.z) * 0.05;
+            // Rocket movement (elliptical path)
+            rocketTime += 0.012;
+            const r = 2.2;
+            rocket.position.x = Math.cos(rocketTime) * r;
+            rocket.position.y = 1.2 + Math.sin(rocketTime * 0.7) * 0.7;
+            rocket.position.z = Math.sin(rocketTime) * 0.7;
+            rocket.rotation.z = Math.atan2(
+                Math.cos(rocketTime * 0.7) * 0.7,
+                -Math.sin(rocketTime) * r
+            );
+            // Animate flame scale for flicker
+            flame.scale.y = 1 + Math.sin(rocketTime * 18) * 0.18;
+            renderer.render(scene, camera);
+        }
+        animate();
+
+        // --- Enhanced Scroll-reveal Animation with Stagger ---
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Stagger child elements
+                    const staggers = entry.target.querySelectorAll('.project-card, .timeline-item');
+                    staggers.forEach((el, i) => {
+                        el.classList.add('stagger');
+                        el.style.animationDelay = (0.12 * i) + 's';
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        // --- 3D Project Cards ---
+        const cards = document.querySelectorAll('.project-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = card.offsetWidth / 2;
+                const centerY = card.offsetHeight / 2;
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (x - centerX) / -20;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
+        });
+
+        // --- 3D Skills Orb ---
+        // Assign a color for each skill
+        const skillColors = {
+            'Java': '#f89820',
+            'PHP': '#777bb4',
+            'JavaScript': '#f7e018',
+            'C#': '#9b4f96',
+            'React': '#61dafb',
+            'Laravel': '#ff2d20',
+            'React Native': '#00d8ff',
+            'Unity': '#222c37',
+            'HTML5': '#e44d26',
+            'CSS3': '#1572b6',
+            'SQL': '#00758f',
+            'Git': '#f34f29',
+            'REST APIs': '#00e676',
+            'Firebase': '#ffcb2b'
+        };
+        const skills = [
+            'Java', 'PHP', 'JavaScript', 'C#', 'React', 'Laravel', 'React Native', 
+            'Unity', 'HTML5', 'CSS3', 'SQL', 'Git', 'REST APIs', 'Firebase'
+        ];
+        const skillsContainer = document.getElementById('skills-container');
+        const skillScene = new THREE.Scene();
+        const skillCamera = new THREE.PerspectiveCamera(75, skillsContainer.clientWidth / skillsContainer.clientHeight, 0.1, 1000);
+        const skillRenderer = new THREE.WebGLRenderer({ alpha: true });
+        skillRenderer.setSize(skillsContainer.clientWidth, skillsContainer.clientHeight);
+        skillsContainer.appendChild(skillRenderer.domElement);
+
+        const skillGroup = new THREE.Group();
+        const sphereGeometry = new THREE.SphereGeometry(2.5, 32, 32);
+        
+        function createTextSprite(text, color) {
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            const fontSize = 32;
+            context.font = `bold ${fontSize}px Arial`;
+            const metrics = context.measureText(text);
+            const textWidth = metrics.width;
+            canvas.width = textWidth + 20;
+            canvas.height = fontSize + 20;
+            context.font = `bold ${fontSize}px Arial`;
+            context.fillStyle = color || 'rgba(0, 255, 255, 0.9)';
+            context.textAlign = 'center';
+            context.textBaseline = 'middle';
+            context.shadowColor = color || '#00ffff';
+            context.shadowBlur = 16;
+            context.fillText(text, canvas.width / 2, canvas.height / 2);
+            const texture = new THREE.CanvasTexture(canvas);
+            const spriteMaterial = new THREE.SpriteMaterial({ map: texture });
+            const sprite = new THREE.Sprite(spriteMaterial);
+            sprite.scale.set(canvas.width/100, canvas.height/100, 1.0);
+            return sprite;
+        }
+
+        for (let i = 0; i < skills.length; i++) {
+            const phi = Math.acos(-1 + (2 * i) / skills.length);
+            const theta = Math.sqrt(skills.length * Math.PI) * phi;
+            const color = skillColors[skills[i]] || '#00ffff';
+            const sprite = createTextSprite(skills[i], color);
+            sprite.position.setFromSphericalCoords(2.5, phi, theta);
+            skillGroup.add(sprite);
+        }
+        
+        skillScene.add(skillGroup);
+        skillCamera.position.z = 5;
+
+        function animateSkills() {
+            requestAnimationFrame(animateSkills);
+            skillGroup.rotation.y += 0.002;
+            skillGroup.rotation.x += 0.001;
+            skillRenderer.render(skillScene, skillCamera);
+        }
+        animateSkills();
+        
+        window.addEventListener('resize', () => {
+            skillCamera.aspect = skillsContainer.clientWidth / skillsContainer.clientHeight;
+            skillCamera.updateProjectionMatrix();
+            skillRenderer.setSize(skillsContainer.clientWidth, skillsContainer.clientHeight);
+        });
+
+        // --- Contact Form ---
+        // (Removed dummy handler here)
+
+    </script>
+    <script>
+    (function() {
+        const container = document.getElementById('face-3d-container');
+        if (!container) return;
+        while (container.firstChild) container.removeChild(container.firstChild);
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+        camera.position.z = 7;
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(width, height);
+        container.appendChild(renderer.domElement);
+
+        // Polygonal face geometry
+        const vertices = new Float32Array([
+            0, -1.2, 0.5,   // 0 chin
+            -0.8, -0.8, 0.6, // 1 left jaw
+            0.8, -0.8, 0.6,  // 2 right jaw
+            -1.1, 0, 0.3,    // 3 left cheek
+            1.1, 0, 0.3,     // 4 right cheek
+            0, 1.2, 0.2,     // 5 top forehead
+            -0.5, 0.8, 0.4,  // 6 left forehead
+            0.5, 0.8, 0.4,   // 7 right forehead
+            0, 0.2, 1.1,     // 8 nose tip
+            0, -0.2, 0.9,    // 9 nose base
+            -0.4, 0.3, 0.7,  // 10 left eye
+            0.4, 0.3, 0.7,   // 11 right eye
+            -0.3, -0.5, 0.8, // 12 left mouth
+            0.3, -0.5, 0.8,  // 13 right mouth
+        ]);
+        const indices = [
+            0,1,2,
+            1,3,6, 1,6,0,
+            2,4,7, 2,7,0,
+            0,6,7, 0,7,2,
+            3,6,5, 3,5,4, 3,4,1, 4,5,7, 4,7,2,
+            6,8,5, 7,5,8, 6,10,8, 7,8,11,
+            10,8,9, 11,8,9,
+            6,10,3, 7,11,4,
+            0,12,13, 0,13,2, 12,1,0, 13,2,0,
+            12,9,13, 12,10,9, 13,9,11
+        ];
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3));
+        geometry.setIndex(indices);
+        geometry.computeVertexNormals();
+
+        // Neon glow: solid mesh with emissive color
+        const solidMaterial = new THREE.MeshPhysicalMaterial({
+            color: 0x00ffff,
+            metalness: 0.2,
+            roughness: 0.2,
+            transmission: 0.7,
+            transparent: true,
+            opacity: 0.25,
+            emissive: 0x00ffff,
+            emissiveIntensity: 0.7,
+            clearcoat: 1.0,
+            clearcoatRoughness: 0.1
+        });
+        const solidMesh = new THREE.Mesh(geometry, solidMaterial);
+        scene.add(solidMesh);
+
+        // Wireframe overlay
+        const wireframe = new THREE.WireframeGeometry(geometry);
+        const lineMaterial = new THREE.LineBasicMaterial({ color: 0x00ffff });
+        const line = new THREE.LineSegments(wireframe, lineMaterial);
+        scene.add(line);
+
+        // Glowing points at vertices
+        const pointsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.08, transparent: true, opacity: 0.8 });
+        const points = new THREE.Points(geometry, pointsMaterial);
+        scene.add(points);
+
+        // Dynamic light
+        const light = new THREE.PointLight(0x00ffff, 1.2, 100);
+        light.position.set(0, 0, 10);
+        scene.add(light);
+
+        // Mouse-based rotation
+        let targetRotX = 0, targetRotY = 0;
+        container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width;
+            const y = (e.clientY - rect.top) / rect.height;
+            targetRotY = (x - 0.5) * 0.8;
+            targetRotX = (y - 0.5) * 0.8;
+        });
+
+        // Blinking (eye vertices scale)
+        let blinkTimer = 0, isBlinking = false, blinkProgress = 0;
+        function blinkEyes() {
+            if (!isBlinking && Math.random() < 0.01) {
+                isBlinking = true;
+                blinkProgress = 0;
+            }
+            if (isBlinking) {
+                blinkProgress += 0.08;
+                // Eye indices: 10 (left), 11 (right)
+                const pos = geometry.attributes.position;
+                const baseY = 0.3;
+                const blinkY = baseY - 0.18 * Math.sin(Math.PI * blinkProgress);
+                pos.setY(10, blinkY);
+                pos.setY(11, blinkY);
+                pos.needsUpdate = true;
+                if (blinkProgress >= 1) {
+                    isBlinking = false;
+                    pos.setY(10, baseY);
+                    pos.setY(11, baseY);
+                    pos.needsUpdate = true;
+                }
+            }
+        }
+
+        // Animation loop
+        let rotX = 0, rotY = 0;
+        function animateFace() {
+            requestAnimationFrame(animateFace);
+            // Smooth rotation
+            rotX += (targetRotX - rotX) * 0.08;
+            rotY += (targetRotY - rotY) * 0.08;
+            solidMesh.rotation.x = rotX;
+            solidMesh.rotation.y = rotY;
+            line.rotation.x = rotX;
+            line.rotation.y = rotY;
+            points.rotation.x = rotX;
+            points.rotation.y = rotY;
+            blinkEyes();
+            renderer.render(scene, camera);
+        }
+        animateFace();
+
+        // Responsive resize
+        window.addEventListener('resize', () => {
+            const w = container.clientWidth;
+            const h = container.clientHeight;
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h);
+        });
+    })();
+    </script>
+    <script>
+    // --- 3D Minimalist Neon Hexagon Symbol Logo ---
+    (function() {
+        const container = document.getElementById('logo-3d-container');
+        if (!container) return;
+        while (container.firstChild) container.removeChild(container.firstChild);
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+        camera.position.z = 4.2;
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setClearColor(0x000000, 0);
+        renderer.setSize(width, height);
+        container.appendChild(renderer.domElement);
+
+        // Hexagon points
+        const hexRadius = 1.1;
+        const hexPoints = [];
+        for (let i = 0; i < 6; i++) {
+            const angle = Math.PI / 3 * i - Math.PI / 6;
+            hexPoints.push(new THREE.Vector3(Math.cos(angle) * hexRadius, Math.sin(angle) * hexRadius, 0));
+        }
+        hexPoints.push(hexPoints[0].clone()); // close the hexagon
+
+        // Neon animated line material
+        const hexLineMaterial = new THREE.LineBasicMaterial({
+            color: 0x00ffff,
+            linewidth: 2,
+            transparent: true,
+            opacity: 0.85
+        });
+        const hexGeometry = new THREE.BufferGeometry().setFromPoints(hexPoints);
+        const hexLine = new THREE.Line(hexGeometry, hexLineMaterial);
+        scene.add(hexLine);
+
+        // Animated inner triangle
+        const triRadius = 0.65;
+        const triPoints = [];
+        for (let i = 0; i < 3; i++) {
+            const angle = Math.PI * 2 / 3 * i - Math.PI / 2;
+            triPoints.push(new THREE.Vector3(Math.cos(angle) * triRadius, Math.sin(angle) * triRadius, 0.01));
+        }
+        triPoints.push(triPoints[0].clone());
+        const triLineMaterial = new THREE.LineBasicMaterial({
+            color: 0xffb300,
+            linewidth: 2,
+            transparent: true,
+            opacity: 0.85
+        });
+        const triGeometry = new THREE.BufferGeometry().setFromPoints(triPoints);
+        const triLine = new THREE.Line(triGeometry, triLineMaterial);
+        scene.add(triLine);
+
+        // Circuit-inspired animated dots
+        const dotCount = 6;
+        const dots = [];
+        for (let i = 0; i < dotCount; i++) {
+            const angle = Math.PI / 3 * i - Math.PI / 6;
+            const geo = new THREE.SphereGeometry(0.07, 12, 12);
+            const mat = new THREE.MeshBasicMaterial({ color: 0x7c4dff, transparent: true, opacity: 0.9 });
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.position.set(Math.cos(angle) * hexRadius, Math.sin(angle) * hexRadius, 0.04);
+            scene.add(mesh);
+            dots.push({ mesh, baseAngle: angle });
+        }
+
+        // Glow effect (sprite)
+        const glowTexture = new THREE.TextureLoader().load('https://raw.githubusercontent.com/mrdoob/three.js/master/examples/textures/lensflare/lensflare0.png');
+        const glowMaterial = new THREE.SpriteMaterial({ map: glowTexture, color: 0x00ffff, transparent: true, opacity: 0.13 });
+        const glow = new THREE.Sprite(glowMaterial);
+        glow.scale.set(2.2, 2.2, 1);
+        scene.add(glow);
+
+        // Animation loop
+        let start = Date.now();
+        function animateLogo() {
+            requestAnimationFrame(animateLogo);
+            let elapsed = (Date.now() - start) / 1000;
+            // Animate hexagon and triangle rotation
+            hexLine.rotation.z = Math.sin(elapsed * 0.7) * 0.18;
+            triLine.rotation.z = -elapsed * 0.9;
+            // Animate dots pulsing around the hexagon
+            for (let i = 0; i < dots.length; i++) {
+                const d = dots[i];
+                const pulse = 1 + 0.13 * Math.sin(elapsed * 2 + i);
+                d.mesh.scale.set(pulse, pulse, pulse);
+            }
+            renderer.render(scene, camera);
+        }
+        animateLogo();
+        // Responsive resize
+        window.addEventListener('resize', () => {
+            const w = container.clientWidth;
+            const h = container.clientHeight;
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h);
+        });
+    })();
+    </script>
+    <script>
+    // --- Typewriter animation for name ---
+    (function() {
+        const name = 'Nethma Yasith';
+        const el = document.getElementById('typed-name');
+        if (!el) return;
+        let idx = 0;
+        function type() {
+            if (idx <= name.length) {
+                el.textContent = name.slice(0, idx);
+                idx++;
+                setTimeout(type, 80);
+            } else {
+                el.textContent = name; // keep cursor blinking
+            }
+        }
+        type();
+    })();
+    </script>
+    <!-- EmailJS SDK (only one, latest) -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        emailjs.init('l_lNDDAWTqEXP5azz');
+        const form = document.getElementById('contact-form');
+        const status = document.getElementById('contact-status');
+        if (!form) return;
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            status.textContent = 'Sending...';
+            emailjs.sendForm('service_2pf7ikd', 'template_tl29vb3', form)
+                .then(function() {
+                    status.textContent = 'Message sent successfully!';
+                    status.style.color = 'var(--accent-color)';
+                    form.reset();
+                }, function(error) {
+                    status.textContent = 'Failed to send. Please try again later.';
+                    status.style.color = '#ff4081';
+                });
+        });
+    });
+    </script>
+    <script>
+    // --- Responsive Navbar ---
+    const nav = document.querySelector('nav.main-nav');
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelectorAll('.nav-link');
+    navToggle.addEventListener('click', function() {
+        nav.classList.toggle('open');
+        navToggle.classList.toggle('open');
+    });
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            nav.classList.remove('open');
+            navToggle.classList.remove('open');
+        });
+    });
+    </script>
+    <script>
+    // --- 3D Project Card Thumbnails ---
+    function createProject3D(canvas, project) {
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 100);
+        camera.position.z = 2.8;
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(width, height);
+        canvas.appendChild(renderer.domElement);
+        let mesh;
+        // Unique geometry per project
+        switch (project) {
+            case 'patient-management':
+                mesh = new THREE.Mesh(
+                    new THREE.BoxGeometry(1.1, 0.7, 0.18),
+                    new THREE.MeshPhysicalMaterial({ color: 0x00ffff, metalness: 0.5, roughness: 0.2, transparent: true, opacity: 0.7 })
+                );
+                break;
+            case 'react-native-chat':
+                mesh = new THREE.Mesh(
+                    new THREE.SphereGeometry(0.7, 32, 32),
+                    new THREE.MeshPhysicalMaterial({ color: 0x00d8ff, metalness: 0.3, roughness: 0.3, transparent: true, opacity: 0.7 })
+                );
+                break;
+            case 'game-development':
+                mesh = new THREE.Mesh(
+                    new THREE.TorusKnotGeometry(0.5, 0.18, 100, 16),
+                    new THREE.MeshPhysicalMaterial({ color: 0x7c4dff, metalness: 0.7, roughness: 0.15, transparent: true, opacity: 0.7 })
+                );
+                break;
+            case 'ecommerce':
+                mesh = new THREE.Mesh(
+                    new THREE.CylinderGeometry(0.6, 0.6, 0.18, 32),
+                    new THREE.MeshPhysicalMaterial({ color: 0xffb300, metalness: 0.5, roughness: 0.2, transparent: true, opacity: 0.7 })
+                );
+                break;
+            case 'student-management':
+                mesh = new THREE.Mesh(
+                    new THREE.OctahedronGeometry(0.7),
+                    new THREE.MeshPhysicalMaterial({ color: 0x1e90ff, metalness: 0.5, roughness: 0.2, transparent: true, opacity: 0.7 })
+                );
+                break;
+            case 'petcare':
+                mesh = new THREE.Mesh(
+                    new THREE.DodecahedronGeometry(0.7),
+                    new THREE.MeshPhysicalMaterial({ color: 0x00e676, metalness: 0.5, roughness: 0.2, transparent: true, opacity: 0.7 })
+                );
+                break;
+            default:
+                mesh = new THREE.Mesh(
+                    new THREE.BoxGeometry(1, 1, 1),
+                    new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: 0.5, roughness: 0.2, transparent: true, opacity: 0.7 })
+                );
+        }
+        scene.add(mesh);
+        const light = new THREE.PointLight(0xffffff, 1.2, 100);
+        light.position.set(2, 2, 4);
+        scene.add(light);
+        function animate() {
+            requestAnimationFrame(animate);
+            mesh.rotation.x += 0.012;
+            mesh.rotation.y += 0.018;
+            renderer.render(scene, camera);
+        }
+        animate();
+        // Responsive resize
+        window.addEventListener('resize', () => {
+            const w = canvas.clientWidth;
+            const h = canvas.clientHeight;
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+            renderer.setSize(w, h);
+        });
+    }
+    document.querySelectorAll('.project-3d-canvas').forEach(div => {
+        createProject3D(div, div.getAttribute('data-project'));
+    });
+    </script>
+    <script>
+    // --- Project Card Clickable Redirect ---
+    document.querySelectorAll('.project-card[data-link]').forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Prevent accidental text selection
+            if (window.getSelection().toString().length === 0) {
+                window.open(card.getAttribute('data-link'), '_blank');
+            }
+        });
+    });
+    </script>
+    <script>
+    // --- Scrollspy for Navbar ---
+    const sectionIds = ['hero', 'projects', 'skills', 'experience', 'contact'];
+    const navLinksArr = Array.from(document.querySelectorAll('.nav-link'));
+    function onScrollSpy() {
+        let scrollPos = window.scrollY || window.pageYOffset;
+        let found = false;
+        for (let i = sectionIds.length - 1; i >= 0; i--) {
+            const section = document.getElementById(sectionIds[i]);
+            if (section && scrollPos + 120 >= section.offsetTop) {
+                navLinksArr.forEach(link => link.classList.remove('active'));
+                const active = navLinksArr.find(link => link.getAttribute('href') === '#' + sectionIds[i]);
+                if (active) active.classList.add('active');
+                found = true;
+                break;
+            }
+        }
+        if (!found) navLinksArr.forEach(link => link.classList.remove('active'));
+    }
+    window.addEventListener('scroll', onScrollSpy);
+    window.addEventListener('resize', onScrollSpy);
+    document.addEventListener('DOMContentLoaded', onScrollSpy);
+    </script>
+    <script>
+    // --- Animated Hero Role Typing (no loop) ---
+    (function() {
+        const role = 'Software Engineering Undergraduate';
+        const el = document.getElementById('hero-animated-role');
+        if (!el) return;
+        let idx = 0;
+        function typeRole() {
+            if (idx <= role.length) {
+                el.textContent = role.slice(0, idx);
+                idx++;
+                setTimeout(typeRole, 60);
+            } else {
+                el.textContent = role;
+            }
+        }
+        typeRole();
+    })();
+    </script>
+</body>
+</html>
