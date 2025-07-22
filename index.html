@@ -668,6 +668,15 @@
             <section id="projects" class="section">
                 <h2>Projects</h2>
                 <div class="project-grid">
+                    <div class="project-card" data-link="https://github.com/Nethma-Yasith/Javaee-Banking-System">
+                        <div class="project-image-container">
+                            <div class="project-3d-canvas" data-project="javaee-banking"></div>
+                        </div>
+                        <div class="project-content">
+                            <h3>JavaEE Banking System (BCD - Business Component Development)</h3>
+                            <p>Developed a secure online banking system using JavaEE for the BCD (Business Component Development) university subject. Features include user authentication, account management, and transaction processing. <br/> <b>Tech:</b> JavaEE, JSP, Servlets, JDBC, MySQL.</p>
+                        </div>
+                    </div>
                     <div class="project-card" data-link="https://github.com/Nethma-Yasith?tab=overview&from=2025-04-01&to=2025-04-30">
                         <div class="project-image-container">
                             <div class="project-3d-canvas" data-project="patient-management"></div>
@@ -1395,6 +1404,12 @@
                 mesh = new THREE.Mesh(
                     new THREE.DodecahedronGeometry(0.7),
                     new THREE.MeshPhysicalMaterial({ color: 0x00e676, metalness: 0.5, roughness: 0.2, transparent: true, opacity: 0.7 })
+                );
+                break;
+            case 'javaee-banking':
+                mesh = new THREE.Mesh(
+                    new THREE.ConeGeometry(0.5, 0.8, 16),
+                    new THREE.MeshPhysicalMaterial({ color: 0x00ffff, metalness: 0.5, roughness: 0.2, transparent: true, opacity: 0.7 })
                 );
                 break;
             default:
