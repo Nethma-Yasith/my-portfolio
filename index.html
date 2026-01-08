@@ -88,24 +88,6 @@
             text-align: center;
         }
 
-        .profile-image-container {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            border: 3px solid var(--accent-color);
-            margin-bottom: 30px;
-            animation: pulse 2.5s infinite ease-in-out;
-            position: relative;
-            box-shadow: 0 0 20px var(--accent-color), inset 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-        .profile-image {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
         #hero h1 {
             font-size: 4.5rem;
             font-weight: 700;
@@ -129,12 +111,6 @@
             font-size: 1.5rem;
             color: var(--text-muted);
             letter-spacing: 1px;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 20px var(--accent-color), inset 0 0 10px rgba(0, 255, 255, 0.5); }
-            50% { transform: scale(1.05); box-shadow: 0 0 35px var(--accent-color), inset 0 0 15px rgba(0, 255, 255, 0.7); }
-            100% { transform: scale(1); box-shadow: 0 0 20px var(--accent-color), inset 0 0 10px rgba(0, 255, 255, 0.5); }
         }
 
         .hero-role-animated {
@@ -668,6 +644,16 @@
             <section id="projects" class="section">
                 <h2>Projects</h2>
                 <div class="project-grid">
+                    
+                    <div class="project-card" data-link="https://github.com/Nethma-Yasith/TomatoGuard">
+                        <div class="project-image-container">
+                            <div class="project-3d-canvas" data-project="tomato-guard"></div>
+                        </div>
+                        <div class="project-content">
+                            <h3>TomatoGuard - Smart Farm AI</h3>
+                            <p>AI-powered mobile app for tomato disease detection using TensorFlow Lite. Features include real-time leaf scanning, AI consultant chatbot (Gemini), and crop timeline management.</p>
+                        </div>
+                    </div>
                     <div class="project-card" data-link="https://github.com/Nethma-Yasith/Javaee-Banking-System">
                         <div class="project-image-container">
                             <div class="project-3d-canvas" data-project="javaee-banking"></div>
@@ -1317,7 +1303,6 @@
         type();
     })();
     </script>
-    <!-- EmailJS SDK (only one, latest) -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -1370,6 +1355,21 @@
         let mesh;
         // Unique geometry per project
         switch (project) {
+            // ✅ ADDED: Red Sphere for TomatoGuard
+            case 'tomato-guard':
+                mesh = new THREE.Mesh(
+                    new THREE.SphereGeometry(0.65, 32, 32),
+                    new THREE.MeshPhysicalMaterial({ color: 0xff4d4d, metalness: 0.4, roughness: 0.2, transparent: true, opacity: 0.8 })
+                );
+                // Green stem
+                const stem = new THREE.Mesh(
+                    new THREE.CylinderGeometry(0.1, 0.05, 0.3, 8),
+                    new THREE.MeshPhysicalMaterial({ color: 0x00ff00, metalness: 0.3 })
+                );
+                stem.position.y = 0.6;
+                mesh.add(stem);
+                break;
+
             case 'patient-management':
                 mesh = new THREE.Mesh(
                     new THREE.BoxGeometry(1.1, 0.7, 0.18),
