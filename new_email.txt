@@ -1,0 +1,21 @@
+            emailjs.init('l_lNDDAWTqEXP5azz');
+            const form = document.getElementById('contact-form');
+            const status = document.getElementById('contact-status');
+            if (!form) return;
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                status.textContent = 'Sending...';
+                status.style.color = 'var(--text-secondary)';
+                emailjs.sendForm('service_2pf7ikd', 'template_tl29vb3', form)
+                    .then(function () {
+                        status.textContent = 'Message sent successfully.';
+                        status.style.color = 'var(--text-primary)';
+                        form.reset();
+                    }, function (error) {
+                        status.textContent = 'Failed to send. Please try again.';
+                        status.style.color = '#ef4444';
+                    });
+            });
+        });
+    </script>
+    <script>
