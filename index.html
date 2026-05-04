@@ -1072,6 +1072,7 @@
                 <textarea name="message" class="form-input" rows="5" placeholder="Your Message" required></textarea>
             </div>
             <input type="hidden" name="title" value="Contact Form" />
+            <input type="hidden" name="time" id="contact-time" value="" />
             <button type="submit" class="form-button">Send Message</button>
         </form>
         <div id="contact-status" style="margin-top: 20px; font-size: 0.95rem;"></div>
@@ -1091,6 +1092,7 @@
             if (!form) return;
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
+                document.getElementById('contact-time').value = new Date().toLocaleString();
                 status.textContent = 'Sending...';
                 status.style.color = 'var(--text-secondary)';
                 emailjs.sendForm('service_2pf7ikd', 'template_tl29vb3', this)
